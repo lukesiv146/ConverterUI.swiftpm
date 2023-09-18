@@ -20,9 +20,17 @@ struct OpeningView: View {
                         .background(Color.blue)
                         .cornerRadius(10)
                     
-                        .navigationBarTitle("Converter")
+                    NavigationLink(destination: DecimalToBinary()) {
+                        Text("DecimalBinary")
+                            .font(.system(size: 24))
+                            .foregroundColor(.white)
+                            .frame(width: 150, height: 70)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                        
+                            .navigationBarTitle("Converter")
+                    }
                 }
-                
                 
             }
         }
