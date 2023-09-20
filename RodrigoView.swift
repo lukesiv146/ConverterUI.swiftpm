@@ -8,18 +8,27 @@
 import SwiftUI
 
 struct RodrigoView: View {
-    @State private var hexNumber = "0x1234"
-    @State private var decNumber = 0
-    var body: some View {
-        VStack {
-            TextField("Hexadecimal Number", text: $hexNumber)
+   @State private var hexNumber = ""
+        @State private var decimalNumber = 0
+
+        var body: some View {
+            VStack {
+                TextField("Enter hexadecimal number", text: $hexNumber)
+                    .keyboardType(.decimalPad)
+                    .padding()
+
+                Button("Convert") {
+                    if let decimal = Int(hexNumber, radix: 16) {
+                        decimalNumber = decimal
+                    } else {
+                        decimalNumber = 0
+                    }
+                }
                 .padding()
-            Button("Convert to Decimal") {
-                decNumber = Int(hexNumber, radix: 16)!
-            }
-            .padding()
-            Text("Decimal Number: \(decNumber)")
-                .padding()
+
+                Text("Decimal number: \(decimalNumber)")
+                    .font(.largeTitle)
+                    .padding()
         }
     }
     
