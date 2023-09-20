@@ -43,16 +43,50 @@ struct OpeningView: View {
                         .cornerRadius(10)
                     
                         .navigationBarTitle("Converter")
+                    
+                    
+                    NavigationLink(destination: HexaToDecimal()) {
+                        Text("HexaDecimal")
+                            .font(.system(size: 24))
+                            .foregroundColor(.white)
+                            .frame(width: 150, height: 70)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                        
+                            .navigationBarTitle("Converter")
+                        
+                    }
+                    
+                    
                 }
                 
-                
-                
-                
-                
-                
+                NavigationLink(destination: BinaryToHexa()) {
+                    Text("BinaryHexa")
+                        .font(.system(size: 24))
+                        .foregroundColor(.white)
+                        .frame(width: 150, height: 70)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                    
+                        .navigationBarTitle("Converter")
+                    
+                    
+                    NavigationLink(destination: HexaToBinary()) {
+                        Text("HexaBinary")
+                            .font(.system(size: 24))
+                            .foregroundColor(.white)
+                            .frame(width: 150, height: 70)
+                            .background(Color.blue)
+                            .cornerRadius(10)
+                        
+                            .navigationBarTitle("Converter")
+                        
+                        
+                    }
+                    
+                    
+                }
             }
         }
-        
-        
     }
 }
