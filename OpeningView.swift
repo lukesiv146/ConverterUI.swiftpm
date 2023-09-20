@@ -30,7 +30,25 @@ struct OpeningView: View {
                         
                             .navigationBarTitle("Converter")
                     }
+                    
+                    
                 }
+                
+                NavigationLink(destination: DecimalToHexa()) {
+                    Text("DecimalHexa")
+                        .font(.system(size: 24))
+                        .foregroundColor(.white)
+                        .frame(width: 150, height: 70)
+                        .background(Color.blue)
+                        .cornerRadius(10)
+                    
+                        .navigationBarTitle("Converter")
+                }
+                
+                
+                
+                
+                
                 
             }
         }
