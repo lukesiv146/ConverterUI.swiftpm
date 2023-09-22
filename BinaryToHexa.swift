@@ -13,29 +13,43 @@ struct BinaryToHexa: View {
     
     var body: some View {
         VStack {
-            Text("Binary to Hexadecimal Converter")
-                .font(.title)
+            TextField("Enter Binary", text: $binaryInput)
                 .padding()
-            
-            TextField("Enter binary number", text: $binaryInput)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
             
-            Button("Convert", action: convertBinaryToHexadecimal)
-                .padding()
+            Button("Convert to Hexadecimal") {
+                hexadecimalOutput = convertBinaryToHex(binaryInput)
+            }
+            .padding()
             
             Text("Hexadecimal: \(hexadecimalOutput)")
-                .font(.headline)
                 .padding()
         }
+        .padding()
     }
     
-    func convertBinaryToHexadecimal() {
-        if let decimalValue = Int(binaryInput, radix: 2) {
-            hexadecimalOutput = String(decimalValue, radix: 16)
-        } else {
-            hexadecimalOutput = "Invalid binary input"
+    func convertBinaryToHex(_ binary: String) -> String {
+        let binaryDigits = Array(binary)
+        let reversedBinaryDigits = binaryDigits.reversed()
+        var decimalValue = 0
+        
+        for (index, digitChar) in reversedBinaryDigits.enumerated() {
+            if digitChar == "1" {
+                decimalValue += 1 << index
+            }
         }
+        
+        var hexString = ""
+        var remainingValue = decimalValue
+        
+        while remainingValue > 0 {
+            let remainder = remainingValue % 16
+            let hexDigit = String(remainder, radix: 16).uppercased()
+            hexString = hexDigit + hexString
+            remainingValue /= 16
+        }
+        
+        return hexString.isEmpty ? "0" : hexString
     }
 }
 

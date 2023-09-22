@@ -13,30 +13,54 @@ struct HexaToBinary: View {
     
     var body: some View {
         VStack {
-            Text("Hex to Binary Converter")
+            Text("Hexadecimal to Binary Converter")
                 .font(.title)
             
             TextField("Enter Hexadecimal", text: $hexInput)
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
             
-            Button("Convert", action: convertHexToBinary)
-                .padding()
+            Button("Convert") {
+                convertHexToBinary()
+            }
+            .padding()
             
             Text("Binary: \(binaryOutput)")
                 .padding()
-                .font(.headline)
         }
         .padding()
     }
     
-    func convertHexToBinary() {
-        if let intValue = Int(hexInput, radix: 16) {
-            binaryOutput = String(intValue, radix: 2)
-        } else {
-            binaryOutput = "Invalid Hexadecimal"
+    private func convertHexToBinary() {
+        let hexString = hexInput.trimmingCharacters(in: .whitespacesAndNewlines)
+        let hexCharacters = Array(hexString.uppercased())
+        var binaryString = ""
+        
+        for hexChar in hexCharacters {
+            guard let decimalValue = hexToDecimal(hexChar) else {
+                binaryOutput = "Invalid Hexadecimal"
+                return
+            }
+            
+            var binaryValue = String(decimalValue, radix: 2)
+            
+            // Ensure each binary representation is 4 digits long
+            while binaryValue.count < 4 {
+                binaryValue = "0" + binaryValue
+            }
+            
+            binaryString += binaryValue
         }
+        
+        binaryOutput = binaryString
+    }
+    
+    private func hexToDecimal(_ hexChar: Character) -> Int? {
+        let hexDigits = "0123456789ABCDEF"
+        if let index = hexDigits.firstIndex(of: hexChar) {
+            return hexDigits.distance(from: hexDigits.startIndex, to: index)
+        }
+        return nil
     }
 }
-
 

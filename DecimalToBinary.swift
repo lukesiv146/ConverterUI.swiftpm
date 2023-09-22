@@ -1,30 +1,45 @@
 import SwiftUI
 
 struct DecimalToBinary: View {
-    @State private var decimalNumber = ""
-    
-    var binaryNumber: String {
-        if let number = Int(decimalNumber) {
-            return String(number, radix: 2)
-        } else {
-            return "Invalid Input"
-        }
-    }
+    @State private var decimalInput = ""
+    @State private var binaryOutput = ""
     
     var body: some View {
         VStack {
-            Text("Decimal to Binary ")
-                .font(.title)
-                .padding()
-            
-            TextField("Enter a Decimal Number", text: $decimalNumber)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+            TextField("Enter a decimal number", text: $decimalInput)
                 .padding()
                 .keyboardType(.numberPad)
             
-            Text("Binary: \(binaryNumber)")
+            Button("Convert to Binary") {
+                if let decimal = Int(decimalInput) {
+                    binaryOutput = decimalToBinary(decimal)
+                } else {
+                    binaryOutput = "Invalid input"
+                }
+            }
+            
+            Text("Binary: \(binaryOutput)")
                 .padding()
         }
+        .padding()
+    }
+    
+    func decimalToBinary(_ decimal: Int) -> String {
+        var binaryString = ""
+        var number = decimal
+        
+        if number == 0 {
+            return "0"
+        }
+        
+        while number > 0 {
+            let remainder = number % 2
+            binaryString = String(remainder) + binaryString
+            number /= 2
+        }
+        
+        return binaryString
     }
 }
+
 

@@ -81,9 +81,7 @@ struct OpeningView: View {
                         
                             .navigationBarTitle("Converter")
                         
-                        
                     }
-                    
                     
                 }
             }

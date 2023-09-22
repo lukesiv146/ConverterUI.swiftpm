@@ -15,28 +15,38 @@ struct BinaryToDecimal: View {
         VStack {
             Text("Binary to Decimal Converter")
                 .font(.title)
-                .padding()
             
-            TextField("Enter Binary Number", text: $binaryInput)
-                .padding()
+            TextField("Enter binary number", text: $binaryInput)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
-            
-            Button("Convert", action: convertBinaryToDecimal)
                 .padding()
+            
+            Button(action: {
+                decimalOutput = convertBinaryToDecimal(binaryInput)
+            }) {
+                Text("Convert")
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+            }
             
             Text("Decimal Result: \(decimalOutput)")
-                .font(.title)
+                .font(.headline)
                 .padding()
         }
     }
     
-    func convertBinaryToDecimal() {
-        if let decimalValue = Int(binaryInput, radix: 2) {
-            decimalOutput = String(decimalValue)
-        } else {
-            decimalOutput = "Invalid Input"
+    func convertBinaryToDecimal(_ binary: String) -> String {
+        let binaryDigits = binary.reversed().map { Int(String($0)) ?? 0 }
+        var decimalResult = 0
+        var multiplier = 1
+        
+        for digit in binaryDigits {
+            decimalResult += digit * multiplier
+            multiplier *= 2
         }
+        
+        return "\(decimalResult)"
     }
 }
-
 
